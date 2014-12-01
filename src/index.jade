@@ -38,6 +38,19 @@ html
                     li Change the template
                     
             section
+                h2 The Router
+                h3 Where routing is configured
+                pre.small
+                    code.small.language-javascript.
+                        App.Router.map(function() {
+                            this.route("posts", function() {
+                                this.route("activePost", { path: "/:id" }, function() {
+                                    this.route("comments");
+                                });
+                            });
+                        });
+                    
+            section
                 h2 Outlets
                 h3 Templates get rendered into parent route's 'outlet'
                 pre
@@ -58,7 +71,8 @@ html
                     
             section
                 h2 Templates
-                h3 Uses Handlebars
+                h3 Uses Handlebars (but moving to HTMLBars)
+                h3 Logic-less
                 pre
                     code.language-javascript.
                         &lt;script type="text/x-handlebars"&gt;
@@ -99,51 +113,5 @@ html
                         });
     
                         ironMan.get('fullName'); // "Tony Stark"
-
-            section
-                h2 Touch Interaction
-                h3 Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a>
-
-            section
-                h2 Responsive Slides
-                h3 Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a>
-
-            section
-                h2 Bullet List
-                h3.bullet Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a>
-                ul
-                    li Bullet 1
-                    li Bullet 2
-                    li Bullet 3
-
-            section
-                h2 Syntax Highlighting
-                h3 Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a>
-                pre
-                    code.language-javascript.
-                        bespoke.from('article', [
-                          classes(),
-                          keys(),
-                          touch(),
-                          bullets('li, .bullet')
-                        ]);
-
-            section(data-bespoke-hash='named-route')
-                h2 Named Route
-                h3 Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a>
-                p Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.
-
-            section
-                h2.bullet Just the beginning...
-                br
-                ul
-                    li Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em>
-                    li Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em>
-                    li Edit JavaScript in <em>'src/scripts/main.js'</em>
-                br
-                ul
-                    li
-                        strong Enjoy! :)
-                        a(href='http://twitter.com/markdalgleish')  -@markdalgleish
 
         script(src='build/build.js')
