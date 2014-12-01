@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Ember: An Introduction</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section>
+        <h1>Ember</h1>
+        <h2>An Introduction</h2>
+      </section>
+      <section>
+        <h2>Routing</h2>
+        <h3 class="bullet">First-Class Citizen</h3>
+        <ul>
+          <li>Helps manage application state</li>
+          <li>Each state represented by a URL</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Active Route Handlers</h2>
+        <h3>At any time, one or more routes can be <em>active</em></h3>
+        <h3 class="bullet">What causes routes to change?</h3>
+        <ul>
+          <li>User interaction with view -> URL change</li>
+          <li>User manually changed URL</li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="bullet">On Route Change</h2>
+        <ul>
+          <li>Conditionally redirect to a new URL</li>
+          <li>Update a controller</li>
+          <li>Change the template</li>
+        </ul>
+      </section>
+      <section>
+        <h2>The Router</h2>
+        <h3>Where routing is configured</h3>
+        <pre><code class="language-javascript">App.Router.map(function() {
+    this.route("about");
+    this.route("favorites", { path: "/favs" });
+});
+</code></pre>
+      </section>
+      <section>
+        <h2>Outlets</h2>
+        <h3>Templates get rendered into parent route's 'outlet'</h3>
+        <pre><code class="language-markup">application
+    index
+    /posts
+        /posts/1
+            /posts/1/comments
+            </code></pre>
+      </section>
+      <section>
+        <h2>Templates</h2>
+        <h3>Markup / data-bindings</h3>
+        <h3 class="bullet">Default 'application' template</h3>
+        <ul>
+          <li>Header / Footer / Decorative Content</li>
+          <li>At least one 'outlet'</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Templates</h2>
+        <h3>Uses Handlebars</h3>
+        <pre><code class="language-javascript">&lt;script type="text/x-handlebars"&gt;
+    Hello, <strong>{{firstName}} {{lastName}}</strong>!
+&lt;/script&gt;
+</code></pre>
+      </section>
+      <section>
+        <h2>Object Model</h2>
+        <h3 class="bullet">Ember.Object</h3>
+        <ul>
+          <li>Always 'extend()'</li>
+          <li>init</li>
+          <li>this._super() </li>
+          <li>(especially if overriding init of core class!)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Computed Properties</h2>
+        <h3 class="bullet">Functions as properties!</h3>
+        <ul>
+          <li>What did you say?</li>
+          <li>FUNCTIONS AS PROPERTIES!</li>
+        </ul>
+      </section>
+      <section>
+        <pre class="small"><code class="language-javascript small">App.Person = Ember.Object.extend({
+    // these will be supplied by `create`
+    firstName: null,
+    lastName: null,
+    fullName: function() {
+        return this.get('firstName') + ' ' + this.get('lastName');
+    }.property('firstName', 'lastName')
+});
+
+var ironMan = App.Person.create({
+    firstName: "Tony",
+    lastName:  "Stark"
+});
+
+ironMan.get('fullName'); // "Tony Stark"
+</code></pre>
+      </section>
+      <section>
+        <h2>Touch Interaction</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a></h3>
+      </section>
+      <section>
+        <h2>Responsive Slides</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a></h3>
+      </section>
+      <section>
+        <h2>Bullet List</h2>
+        <h3 class="bullet">Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a></h3>
+        <ul>
+          <li>Bullet 1</li>
+          <li>Bullet 2</li>
+          <li>Bullet 3</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Syntax Highlighting</h2>
+        <h3>Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a></h3>
+        <pre><code class="language-javascript">bespoke.from('article', [
+  classes(),
+  keys(),
+  touch(),
+  bullets('li, .bullet')
+]);
+</code></pre>
+      </section>
+      <section data-bespoke-hash="named-route">
+        <h2>Named Route</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a></h3>
+        <p>Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.</p>
+      </section>
+      <section>
+        <h2 class="bullet">Just the beginning...</h2><br>
+        <ul>
+          <li>Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em></li>
+          <li>Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em></li>
+          <li>Edit JavaScript in <em>'src/scripts/main.js'</em></li>
+        </ul><br>
+        <ul>
+          <li><strong>Enjoy! :)</strong><a href="http://twitter.com/markdalgleish"> -@markdalgleish</a></li>
+        </ul>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
