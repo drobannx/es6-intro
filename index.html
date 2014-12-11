@@ -13,24 +13,24 @@
         <h2>An Introduction</h2>
       </section>
       <section>
-        <h2>Routing</h2>
-        <h3 class="bullet">First-Class Citizen</h3>
+        <h1>Routing</h1>
+        <h2 class="bullet">First-Class Citizen</h2>
         <ul>
           <li>Helps manage application state</li>
           <li>Each state represented by a URL</li>
         </ul>
       </section>
       <section>
-        <h2>Active Route Handlers</h2>
-        <h3>At any time, one or more routes can be <em>active</em></h3>
-        <h3 class="bullet">What causes routes to change?</h3>
+        <h1>Active Route Handlers</h1>
+        <h2>At any time, one or more routes can be <em>active</em></h2>
+        <h2 class="bullet">What causes routes to change?</h2>
         <ul>
           <li>User interaction with view -> URL change</li>
           <li>User manually changed URL</li>
         </ul>
       </section>
       <section>
-        <h2 class="bullet">On Route Change</h2>
+        <h1 class="bullet">On Route Change</h1>
         <ul>
           <li>Conditionally redirect to a new URL</li>
           <li>Update a controller</li>
@@ -38,8 +38,8 @@
         </ul>
       </section>
       <section>
-        <h2>The Router</h2>
-        <h3>Where routing is configured</h3>
+        <h1>The Router</h1>
+        <h2>Where routing is configured</h2>
         <pre class="small"><code class="small language-javascript">App.Router.map(function() {
     this.route("posts", function() {
         this.route("activePost", { path: "/:id" }, function() {
@@ -50,8 +50,8 @@
 </code></pre>
       </section>
       <section>
-        <h2>Outlets</h2>
-        <h3>Templates get rendered into parent route's 'outlet'</h3>
+        <h1>Outlets</h1>
+        <h2>Templates get rendered into parent route's 'outlet'</h2>
         <pre><code class="language-markup">application
     index
     /posts
@@ -60,26 +60,26 @@
             </code></pre>
       </section>
       <section>
-        <h2>Templates</h2>
-        <h3>Markup / data-bindings</h3>
-        <h3 class="bullet">Default 'application' template</h3>
+        <h1>Templates</h1>
+        <h2>Markup / data-bindings</h2>
+        <h2 class="bullet">Default 'application' template</h2>
         <ul>
           <li>Header / Footer / Decorative Content</li>
           <li>At least one 'outlet'</li>
         </ul>
       </section>
       <section>
-        <h2>Templates</h2>
-        <h3>Uses Handlebars (but moving to HTMLBars)</h3>
-        <h3>Logic-less</h3>
+        <h1>Templates</h1>
+        <h2>Uses Handlebars (but moving to HTMLBars)</h2>
+        <h2>Logic-less</h2>
         <pre><code class="language-javascript">&lt;script type="text/x-handlebars"&gt;
     Hello, <strong>{{firstName}} {{lastName}}</strong>!
 &lt;/script&gt;
 </code></pre>
       </section>
       <section>
-        <h2>Object Model</h2>
-        <h3 class="bullet">Ember.Object</h3>
+        <h1>Object Model</h1>
+        <h2 class="bullet">Ember.Object</h2>
         <ul>
           <li>Always 'extend()'</li>
           <li>init</li>
@@ -88,8 +88,8 @@
         </ul>
       </section>
       <section>
-        <h2>Computed Properties</h2>
-        <h3 class="bullet">Functions as properties!</h3>
+        <h1>Computed Properties</h1>
+        <h2 class="bullet">Functions as properties!</h2>
         <ul>
           <li>What did you say?</li>
           <li>FUNCTIONS AS PROPERTIES!</li>
