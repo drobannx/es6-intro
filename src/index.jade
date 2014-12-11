@@ -14,6 +14,60 @@ html
             section
                 h1 Ember
                 h2 An Introduction
+                
+            section
+                h1 Terms
+                table
+                    tr
+                        th Ember
+                        th Silverlight
+                    tr
+                        td Route
+                        td ViewModel Constructor
+                    tr
+                        td Controller
+                        td ViewModel
+                    tr
+                        td View
+                        td Storyboard
+                    tr
+                        td Template
+                        td XAML Page
+                        
+            section
+                h1 Object Model
+                h2.bullet Ember.Object
+                ul
+                    li Always 'extend()'
+                    li init
+                    li this._super() 
+                    li (especially if overriding init of core class!)
+
+            section
+                h1 Computed Properties
+                h2.bullet Functions as properties!
+                ul
+                    li What did you say?
+                    li FUNCTIONS AS PROPERTIES!
+
+            section
+                pre.small
+                    code.language-javascript.small.
+                        App.Person = Ember.Object.extend({
+                            // these will be supplied by `create`
+                            firstName: null,
+                            lastName: null,
+                            fullName: function() {
+                                return this.get('firstName') + ' ' + this.get('lastName');
+                            }.property('firstName', 'lastName')
+                        });
+
+                        var ironMan = App.Person.create({
+                            firstName: "Tony",
+                            lastName:  "Stark"
+                        });
+
+                        ironMan.get('fullName'); // "Tony Stark"
 
             section
                 h1 Routing
@@ -78,40 +132,5 @@ html
                         &lt;script type="text/x-handlebars"&gt;
                             Hello, <strong>{{firstName}} {{lastName}}</strong>!
                         &lt;/script&gt;
-                    
-            section
-                h1 Object Model
-                h2.bullet Ember.Object
-                ul
-                    li Always 'extend()'
-                    li init
-                    li this._super() 
-                    li (especially if overriding init of core class!)
-                    
-            section
-                h1 Computed Properties
-                h2.bullet Functions as properties!
-                ul
-                    li What did you say?
-                    li FUNCTIONS AS PROPERTIES!
-                    
-            section
-                pre.small
-                    code.language-javascript.small.
-                        App.Person = Ember.Object.extend({
-                            // these will be supplied by `create`
-                            firstName: null,
-                            lastName: null,
-                            fullName: function() {
-                                return this.get('firstName') + ' ' + this.get('lastName');
-                            }.property('firstName', 'lastName')
-                        });
-                        
-                        var ironMan = App.Person.create({
-                            firstName: "Tony",
-                            lastName:  "Stark"
-                        });
-    
-                        ironMan.get('fullName'); // "Tony Stark"
 
         script(src='build/build.js')
