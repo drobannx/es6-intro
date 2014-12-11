@@ -16,30 +16,30 @@ html
                 h2 An Introduction
 
             section
-                h2 Routing
-                h3.bullet First-Class Citizen
+                h1 Routing
+                h2.bullet First-Class Citizen
                 ul
                     li Helps manage application state
                     li Each state represented by a URL
                     
             section
-                h2 Active Route Handlers
-                h3 At any time, one or more routes can be <em>active</em>
-                h3.bullet What causes routes to change?
+                h1 Active Route Handlers
+                h2 At any time, one or more routes can be <em>active</em>
+                h2.bullet What causes routes to change?
                 ul
                     li User interaction with view -> URL change
                     li User manually changed URL
             
             section
-                h2.bullet On Route Change
+                h1.bullet On Route Change
                 ul
                     li Conditionally redirect to a new URL
                     li Update a controller
                     li Change the template
                     
             section
-                h2 The Router
-                h3 Where routing is configured
+                h1 The Router
+                h2 Where routing is configured
                 pre.small
                     code.small.language-javascript.
                         App.Router.map(function() {
@@ -51,8 +51,8 @@ html
                         });
                     
             section
-                h2 Outlets
-                h3 Templates get rendered into parent route's 'outlet'
+                h1 Outlets
+                h2 Templates get rendered into parent route's 'outlet'
                 pre
                     code.language-markup.
                         application
@@ -62,17 +62,17 @@ html
                                     /posts/1/comments
                     
             section
-                h2 Templates
-                h3 Markup / data-bindings
-                h3.bullet Default 'application' template
+                h1 Templates
+                h2 Markup / data-bindings
+                h2.bullet Default 'application' template
                 ul
                     li Header / Footer / Decorative Content
                     li At least one 'outlet'
                     
             section
-                h2 Templates
-                h3 Uses Handlebars (but moving to HTMLBars)
-                h3 Logic-less
+                h1 Templates
+                h2 Uses Handlebars (but moving to HTMLBars)
+                h2 Logic-less
                 pre
                     code.language-javascript.
                         &lt;script type="text/x-handlebars"&gt;
@@ -80,8 +80,8 @@ html
                         &lt;/script&gt;
                     
             section
-                h2 Object Model
-                h3.bullet Ember.Object
+                h1 Object Model
+                h2.bullet Ember.Object
                 ul
                     li Always 'extend()'
                     li init
@@ -89,8 +89,8 @@ html
                     li (especially if overriding init of core class!)
                     
             section
-                h2 Computed Properties
-                h3.bullet Functions as properties!
+                h1 Computed Properties
+                h2.bullet Functions as properties!
                 ul
                     li What did you say?
                     li FUNCTIONS AS PROPERTIES!
