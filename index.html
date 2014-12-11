@@ -150,18 +150,19 @@ ironMan.get('fullName'); // "Tony Stark"
       </section>
       <section>
         <h1>The Router</h1>
-        <h2>Where routing is configured</h2>
-        <pre class="small"><code class="small language-javascript">App.Router.map(function() {
+        <h2>Similar to "RouteConfig.cs" and "WebApiConfig.cs"</h2>
+        <pre class="small bullet"><code class="small language-javascript">App.Router.map(function() {
     this.route("posts", function() {
         this.route("activePost", { path: "/:id" }, function() {
             this.route("comments");
         });
     });
 });</code></pre>
-        <h2>Example Route
+        <div class="bullet">
+          <h2>Example Route</h2>
           <pre class="small"><code class="small language-markup">/posts/123/comments
 </code></pre>
-        </h2>
+        </div>
       </section>
       <section>
         <h1>Outlets</h1>
