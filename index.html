@@ -14,6 +14,67 @@
         <h2>An Introduction</h2>
       </section>
       <section>
+        <h1>Terms</h1>
+        <table>
+          <tr>
+            <th>Ember</th>
+            <th>Silverlight</th>
+          </tr>
+          <tr>
+            <td>Route</td>
+            <td>ViewModel Constructor</td>
+          </tr>
+          <tr>
+            <td>Controller</td>
+            <td>ViewModel</td>
+          </tr>
+          <tr>
+            <td>View</td>
+            <td>Storyboard</td>
+          </tr>
+          <tr>
+            <td>Template</td>
+            <td>XAML Page</td>
+          </tr>
+        </table>
+      </section>
+      <section>
+        <h1>Object Model</h1>
+        <h2 class="bullet">Ember.Object</h2>
+        <ul>
+          <li>Always 'extend()'</li>
+          <li>init</li>
+          <li>this._super() </li>
+          <li>(especially if overriding init of core class!)</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Computed Properties</h1>
+        <h2 class="bullet">Functions as properties!</h2>
+        <ul>
+          <li>What did you say?</li>
+          <li>FUNCTIONS AS PROPERTIES!</li>
+        </ul>
+      </section>
+      <section>
+        <pre class="small"><code class="language-javascript small">App.Person = Ember.Object.extend({
+    // these will be supplied by `create`
+    firstName: null,
+    lastName: null,
+    fullName: function() {
+        return this.get('firstName') + ' ' + this.get('lastName');
+    }.property('firstName', 'lastName')
+});
+
+var ironMan = App.Person.create({
+    firstName: "Tony",
+    lastName:  "Stark"
+});
+
+ironMan.get('fullName'); // "Tony Stark"
+</code></pre>
+      </section>
+      <section>
         <h1>Routing</h1>
         <h2 class="bullet">First-Class Citizen</h2>
         <ul>
@@ -76,42 +137,6 @@
         <pre><code class="language-javascript">&lt;script type="text/x-handlebars"&gt;
     Hello, <strong>{{firstName}} {{lastName}}</strong>!
 &lt;/script&gt;
-</code></pre>
-      </section>
-      <section>
-        <h1>Object Model</h1>
-        <h2 class="bullet">Ember.Object</h2>
-        <ul>
-          <li>Always 'extend()'</li>
-          <li>init</li>
-          <li>this._super() </li>
-          <li>(especially if overriding init of core class!)</li>
-        </ul>
-      </section>
-      <section>
-        <h1>Computed Properties</h1>
-        <h2 class="bullet">Functions as properties!</h2>
-        <ul>
-          <li>What did you say?</li>
-          <li>FUNCTIONS AS PROPERTIES!</li>
-        </ul>
-      </section>
-      <section>
-        <pre class="small"><code class="language-javascript small">App.Person = Ember.Object.extend({
-    // these will be supplied by `create`
-    firstName: null,
-    lastName: null,
-    fullName: function() {
-        return this.get('firstName') + ' ' + this.get('lastName');
-    }.property('firstName', 'lastName')
-});
-
-var ironMan = App.Person.create({
-    firstName: "Tony",
-    lastName:  "Stark"
-});
-
-ironMan.get('fullName'); // "Tony Stark"
 </code></pre>
       </section>
     </article>
