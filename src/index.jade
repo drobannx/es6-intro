@@ -47,11 +47,62 @@ html
                 h1 Computed Properties
                 h2.bullet Functions as properties!
                 ul
-                    li What did you say?
-                    li FUNCTIONS AS PROPERTIES!
+                    li Create properties as a function of other properties
+                    li Updates when dependent property changes
+                    
+            section
+                h1 Computed Properties
+                h2 In Silverlight
+                
+            section
+                h1 Custom 'getter' in C#
+                h2 "Create properties as a function of other properties"
+                pre.small
+                    code.language-csharp.small.
+                        public string FirstName { get; set; }
+                        public string LastName { get; set; }
+                        public string FullName 
+                        {
+                            get
+                            {
+                                return FirstName + " " + LastName;
+                            }
+                        }
+                    
+            section
+                h1 INotifyPropertyChanged
+                h2 "Updates when dependent property changes"
+                pre.small
+                    code.language-csharp.small.
+                        public class Person : INotifyPropertyChanged
+                        {
+                            private string _firstName;
+                            public string FirstName
+                            {
+                                get { return _firstName; }
+                                set { _firstName = value; NotifyPropertyChanged("FirstName"); }
+                            }
+                        
+                            public event PropertyChangedEventHandler PropertyChanged;
+                            private void NotifyPropertyChanged(String propertyName)
+                            {
+                                PropertyChangedEventHandler handler = PropertyChanged;
+                                if (handler != null)
+                                {
+                                    handler(this, new PropertyChangedEventArgs(propertyName));
+                                }
+                            }
+                        }
+                    
+            section
+                h1 Computed Properties
+                h2 In Ember
 
             section
-                pre.small
+                h1.bullet Ember.Object
+                h2.bullet "Create properties as a function of other properties"
+                h2.bullet "Updates when dependent property changes"
+                pre.small.bullet
                     code.language-javascript.small.
                         App.Person = Ember.Object.extend({
                             // these will be supplied by `create`
