@@ -51,6 +51,11 @@ gulp.task('css', ['clean:css'], function() {
     .pipe(connect.reload());
 });
 
+gulp.task('favicon', ['clean:favicon'], function() {
+    return gulp.src('src/favicon.ico')
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('images', ['clean:images'], function() {
   return gulp.src('src/images/**/*')
     .pipe(gulp.dest('dist/images'))
@@ -82,6 +87,11 @@ gulp.task('clean:images', function() {
     .pipe(rimraf());
 });
 
+gulp.task('clean:favicon', function() {
+    return gulp.src('dist/favicon.ico')
+        .pipe(rimraf());
+});
+
 gulp.task('connect', ['build'], function(done) {
   connect.server({
     root: 'dist',
@@ -105,6 +115,6 @@ gulp.task('deploy', ['build'], function(done) {
   ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log }, done);
 });
 
-gulp.task('build', ['js', 'html', 'css', 'images']);
+gulp.task('build', ['js', 'html', 'css', 'images', 'favicon']);
 gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', ['build']);
