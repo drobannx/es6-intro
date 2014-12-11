@@ -52,12 +52,61 @@
         <h1>Computed Properties</h1>
         <h2 class="bullet">Functions as properties!</h2>
         <ul>
-          <li>What did you say?</li>
-          <li>FUNCTIONS AS PROPERTIES!</li>
+          <li>Create properties as a function of other properties</li>
+          <li>Updates when dependent property changes</li>
         </ul>
       </section>
       <section>
-        <pre class="small"><code class="language-javascript small">App.Person = Ember.Object.extend({
+        <h1>Computed Properties</h1>
+        <h2>In Silverlight</h2>
+      </section>
+      <section>
+        <h1>Custom 'getter' in C#</h1>
+        <h2>"Create properties as a function of other properties"</h2>
+        <pre class="small"><code class="language-csharp small">public string FirstName { get; set; }
+public string LastName { get; set; }
+public string FullName 
+{
+    get
+    {
+        return FirstName + " " + LastName;
+    }
+}
+</code></pre>
+      </section>
+      <section>
+        <h1>INotifyPropertyChanged</h1>
+        <h2>"Updates when dependent property changes"</h2>
+        <pre class="small"><code class="language-csharp small">public class Person : INotifyPropertyChanged
+{
+    private string _firstName;
+    public string FirstName
+    {
+        get { return _firstName; }
+        set { _firstName = value; NotifyPropertyChanged("FirstName"); }
+    }
+    
+    public event PropertyChangedEventHandler PropertyChanged;
+    private void NotifyPropertyChanged(String propertyName)
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null)
+        {
+            handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}
+</code></pre>
+      </section>
+      <section>
+        <h1>Computed Properties</h1>
+        <h2>In Ember</h2>
+      </section>
+      <section>
+        <h1 class="bullet">Ember.Object</h1>
+        <h2 class="bullet">"Create properties as a function of other properties"</h2>
+        <h2 class="bullet">"Updates when dependent property changes"</h2>
+        <pre class="small bullet"><code class="language-javascript small">App.Person = Ember.Object.extend({
     // these will be supplied by `create`
     firstName: null,
     lastName: null,
