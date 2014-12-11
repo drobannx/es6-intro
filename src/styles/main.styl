@@ -11,7 +11,7 @@
     background-image: url('../images/paycorLogo.png');
     background-position: bottom 10px left 10px;
     background-repeat: no-repeat;
-    background-size: 300px;
+    background-size: 10%;
 }
 
 table {
@@ -38,4 +38,25 @@ table {
 code.small[class*="language-"],
 pre.small[class*="language-"] {
     font-size: 12px;
+}
+
+/* Phones, small tablets */
+@media(max-width: 767px) {
+    .bespoke-parent {
+        background-size: 30%;
+    }
+}
+
+/* Tablets */
+@media(min-width: 768px) and (max-width: 991px) {
+    .bespoke-parent {
+        background-size: 20%;
+    }
+}
+
+/* Desktops */
+@media(min-width: 992px) and (max-width: 1199px) {
+    .bespoke-parent {
+        background-size: 15%;
+    }
 }
