@@ -19,8 +19,8 @@
           <h2>Netscape Plugin Application Programming Interface</h2>
           <h2>Hook-in mechanism for plug-ins (like Silverlight)</h2>
         </div>
-        <h2 class="bullet">Being deprecated</h2>
-        <ul>
+        <h2 class="bullet l-p-t10"><a href="http://www.chromium.org/developers/npapi-deprecation">http://www.chromium.org/developers/npapi-deprecation</a></h2>
+        <ul class="l-p-t10">
           <li>January 2015 - Whitelist-permitted plug-ins blocked</li>
           <li>April 2015 - Plug-ins disabled by default</li>
           <li>September 2015 - Plug-in support completely removed</li>
@@ -253,10 +253,34 @@ Router.map(function() {
         </ul>
       </section>
       <section>
-        <h1>Templates</h1>
-        <h2>Uses Handlebars (but moving to HTMLBars)</h2>
-        <pre><code class="language-javascript">&lt;script type="text/x-handlebars"&gt;
-    Hello, <strong>{{firstName}} {{lastName}}</strong>!
+        <h1 class="bullet">Templates</h1>
+        <div class="bullet">
+          <h2>Uses Handlebars</h2>
+          <h2><a href="http://handlebarsjs.com/">http://handlebarsjs.com/</a></h2>
+        </div>
+        <div class="bullet l-p-t10">
+          <h2>Moving to HTMLBars</h2>
+          <h2><a href="http://talks.erikbryn.com/htmlbars/">http://talks.erikbryn.com/htmlbars/</a></h2>
+          <h2>Currently in beta - Release mid-late January</h2>
+        </div>
+      </section>
+      <section>
+        <h1>Templates - Example</h1>
+        <pre class="small"><code class="language-javascript small">&lt;script type="text/x-handlebars" data-template-name="posts"&gt;
+    &lt;div class="container-fluid"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-4"&gt;
+                // List of posts
+            &lt;/div&gt;
+            &lt;div class="col-md-8"&gt;
+                {{outlet}}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+&lt;script type="text/x-handlebars" data-template-name="activePost"&gt;
+    {{model.name}}
+    {{model.message}}
 &lt;/script&gt;
 </code></pre>
       </section>
