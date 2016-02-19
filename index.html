@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>ES2015: An Introduction</title>
     <link rel="stylesheet" type="text/css" href="build/build.css">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   </head>
   <body>
     <article>
@@ -14,16 +13,96 @@
         <h2>An Introduction</h2>
       </section>
       <section>
-        <h1>let / const</h1>
+        <h1>Block Scope</h1>
+      </section>
+      <section>
+        <h1>"let"</h1>
+        <ul class="l-p-t10 bullet">
+          <li>Let restricts the scope of the variable to block scope</li>
+          <li>There is no variable hoisting as there is with using var</li>
+          <li>Can be reassigned</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">function addNumbers(arrayOfNumbers) {
+    let total = 0;
+    
+    arraryOfNumbers.forEach(function(number) {
+        let sum = total + number;
+        total = sum;
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h1>"const"</h1>
+        <ul class="l-p-t10 bullet">
+          <li>Creates a read-only reference to a variable with block scope</li>
+          <li>Must specify a value at the time that the variable is declared</li>
+          <li>Objects defined with const can be manipulated, just not reassigned</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">const obj = {};
+obj.name = "Brandon"; // This works
+
+const obj = { name: 'Brandon' };
+obj = {}; // This does not work, reference is changing</code></pre>
       </section>
       <section>
         <h1>Enhanced object literals</h1>
+        <ul class="l-p-t10 bullet">
+          <li>If the key and value have the same name, the value can be omitted</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">let name = "Brandon";
+
+// The below 2 are the same
+let obj = { name };
+let obj1 = { name: name };
+</code></pre>
       </section>
       <section>
         <h1>Arrow Functions aka "Fat Arrow"</h1>
+        <ul class="l-p-t10 bullet">
+          <li>More concise way of declaring functions</li>
+          <li>Arrow functions retain lexical scope of 'this' inside the function</li>
+          <li>No more doing this:<code class="language-javascript small">var thisView = this;</code></li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">let arrayOfNumbers = [1, 2, 3, 4, 5];
+
+arrayOfNumbers.forEach((number) => {
+    // 'this' is the same inside here!
+    console.log(number);
+});</code></pre>
+        <ul class="l-p-t10 bullet">
+          <li></li>
+        </ul>
+      </section>
+      <section>
+        <h1>Destructuring</h1>
       </section>
       <section>
         <h1>Array Destructuring</h1>
+        <ul class="l-p-10 bullet">
+          <li>Helpful for returning multiple values from a function</li>
+          <li>Easily assign multiple variables at a time</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">let [firstValue] = [1];
+console.log(firstValue); // 1
+let [firstValue, secondValue] = [1, 2];
+console.log(firstValue, secondValue); // 1, 2
+let [, secondValue] = [1, 2];
+console.log(secondValue); // 2
+</code></pre>
+      </section>
+      <section>
+        <h1>String Destructuring</h1>
+        <ul class="l-p-10 bullet">
+          <li>Strings can also be destructured very similar to arrays</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">let [a, b, c] = 'abc';
+console.log(a, b, c) // a b c</code></pre>
+      </section>
+      <section>
+        <h1>Object Destructuring</h1>
+        <ul class="l-p-10 bullet">
+          <li>Objects values can be destructured as well</li>
+        </ul>
       </section>
       <section>
         <h1>Spread / Rest Operators</h1>
@@ -32,16 +111,16 @@
         <h1>Default parameters</h1>
       </section>
       <section>
-        <h1>Object Destructuring</h1>
-      </section>
-      <section>
         <h1>"Classes"</h1>
       </section>
       <section>
-        <h1>Generators / Iterators</h1>
+        <h1>Generators</h1>
       </section>
       <section>
         <h1>Question / Comments</h1>
+      </section>
+      <section>
+        <h1>es6katas.org</h1>
       </section>
     </article>
     <script src="build/build.js"></script>
