@@ -53,7 +53,12 @@ obj = {}; // This does not work, reference is changing</code></pre>
 
 // The below 2 are the same
 let obj = { name };
-let obj1 = { name: name };
+let obj1 = { name: name };</code></pre>
+        <ul class="l-p-t10 bullet">
+          <li>Object literal properties can now be computed values instead of only static</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">const propertyName = 'name';
+const obj = { [propertyName]: 'Brandon'};
 </code></pre>
       </section>
       <section>
