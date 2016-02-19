@@ -10,291 +10,36 @@
   <body>
     <article>
       <section>
-        <h1>Ember</h1>
+        <h1>ES2015</h1>
         <h2>An Introduction</h2>
       </section>
+      <section></section>
       <section>
-        <h1 class="bullet">NPAPI Deprecation</h1>
-        <div class="bullet">
-          <h2>Netscape Plugin Application Programming Interface</h2>
-          <h2>Hook-in mechanism for plug-ins (like Silverlight)</h2>
-        </div>
-        <h2 class="bullet l-p-t10"><a href="http://www.chromium.org/developers/npapi-deprecation">http://www.chromium.org/developers/npapi-deprecation</a></h2>
-        <ul class="l-p-t10">
-          <li>January 2015 - Whitelist-permitted plug-ins blocked</li>
-          <li>April 2015 - Plug-ins disabled by default</li>
-          <li>September 2015 - Plug-in support completely removed</li>
-        </ul>
+        <h1>let / const</h1>
       </section>
       <section>
-        <h1>Terms</h1>
-        <table>
-          <tr>
-            <th>Ember</th>
-            <th>Silverlight</th>
-          </tr>
-          <tr>
-            <td>Route</td>
-            <td>ViewModel Constructor</td>
-          </tr>
-          <tr>
-            <td>Controller</td>
-            <td>ViewModel</td>
-          </tr>
-          <tr>
-            <td>View</td>
-            <td>Storyboard</td>
-          </tr>
-          <tr>
-            <td>Template</td>
-            <td>XAML Page</td>
-          </tr>
-        </table>
+        <h1>Enhanced object literals</h1>
       </section>
       <section>
-        <h1>Object Model</h1>
-        <h2 class="bullet">Ember.Object</h2>
-        <ul>
-          <li>Always 'extend()'</li>
-          <li>init</li>
-          <li>this._super() </li>
-          <li>(especially if overriding init of core class!)</li>
-        </ul>
+        <h1>Arrow Functions aka "Fat Arrow"</h1>
       </section>
       <section>
-        <h1>Computed Properties</h1>
-        <h2 class="bullet">Functions as properties!</h2>
-        <ul>
-          <li>Create properties as a function of other properties</li>
-          <li>Updates when dependent property changes</li>
-        </ul>
+        <h1>Array Destructuring</h1>
       </section>
       <section>
-        <h1>Computed Properties</h1>
-        <h2>In Silverlight</h2>
+        <h1>Spread / Rest Operators</h1>
       </section>
       <section>
-        <h1>Custom 'getter' in C#</h1>
-        <h2>"Create properties as a function of other properties"</h2>
-        <pre class="small"><code class="language-csharp small">public string FirstName { get; set; }
-public string LastName { get; set; }
-public string FullName 
-{
-    get
-    {
-        return FirstName + " " + LastName;
-    }
-}
-</code></pre>
+        <h1>Default parameters</h1>
       </section>
       <section>
-        <h1>INotifyPropertyChanged</h1>
-        <h2>"Updates when dependent property changes"</h2>
-        <pre class="xsmall"><code class="language-csharp xsmall">public class Person : INotifyPropertyChanged
-{
-    private string _firstName;
-    public string FirstName
-    {
-        get { return _firstName; }
-        set { _firstName = value; NotifyPropertyChanged("FirstName"); }
-    }
-    
-    public event PropertyChangedEventHandler PropertyChanged;
-    private void NotifyPropertyChanged(String propertyName)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null)
-        {
-            handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-}
-</code></pre>
+        <h1>Object Destructuring</h1>
       </section>
       <section>
-        <h1>Computed Properties</h1>
-        <h2>In Ember</h2>
+        <h1>"Classes"</h1>
       </section>
       <section>
-        <h1 class="bullet">Ember.Object</h1>
-        <h2 class="bullet">"Create properties as a function of other properties"</h2>
-        <h2 class="bullet">"Updates when dependent property changes"</h2>
-        <pre class="small bullet"><code class="language-javascript small">App.Person = Ember.Object.extend({
-    // these will be supplied by `create`
-    firstName: null,
-    lastName: null,
-    fullName: function() {
-        return this.get('firstName') + ' ' + this.get('lastName');
-    }.property('firstName', 'lastName')
-});
-
-var ironMan = App.Person.create({
-    firstName: "Tony",
-    lastName:  "Stark"
-});
-
-ironMan.get('fullName'); // "Tony Stark"
-</code></pre>
-      </section>
-      <section>
-        <h1>Routing</h1>
-        <h2 class="bullet">First-Class Citizen</h2>
-        <ul>
-          <li>Helps manage application state</li>
-          <li>Each state represented by a URL</li>
-        </ul>
-      </section>
-      <section>
-        <h1>Active Route Handlers</h1>
-        <h2>At any time, one or more routes can be <em>active</em></h2>
-        <h2 class="bullet">What causes routes to change?</h2>
-        <ul>
-          <li>User interaction with view -> URL change</li>
-          <li>User manually changed URL</li>
-        </ul>
-      </section>
-      <section>
-        <h1 class="bullet">On Route Change</h1>
-        <ul>
-          <li>Conditionally redirect to a new URL</li>
-          <li>Update a controller</li>
-          <li>Change the template</li>
-        </ul>
-      </section>
-      <section>
-        <h1>The Router</h1>
-        <h2>Similar to "RouteConfig.cs" and "WebApiConfig.cs"</h2>
-        <pre class="small bullet"><code class="small language-javascript">var Router = Ember.Router.extend({
-    location: config.locationType
-});
-
-Router.map(function() {
-    this.route("posts", function() {
-        this.route("activePost", { path: "/:id" }, function() {
-            this.route("comments");
-        });
-    });
-});</code></pre>
-        <div class="bullet">
-          <h2>Example Route</h2>
-          <pre class="small"><code class="small language-markup">/posts/123/comments
-</code></pre>
-        </div>
-      </section>
-      <section>
-        <h1>Controllers</h1>
-        <h2 class="bullet">Think 'ViewModel'</h2>
-        <ul>
-          <li>Decorate models with display logic</li>
-          <li>'Business' logic - saving / updating / deleting</li>
-          <li>Bottom line: stuff that doesn't belong in the model</li>
-        </ul>
-      </section>
-      <section>
-        <h1>Controllers - Example</h1>
-        <h2>Storing Application Properties</h2>
-        <pre class="small"><code class="language-javascript small">export default Ember.Controller.extend({
-    // the initial value of the `search` property
-    search: '',
-    actions: {
-        query: function() {
-            // the current value of the text field
-            var query = this.get('search');
-            this.transitionToRoute('search', { query: query });
-        }
-    }
-});
-</code></pre>
-      </section>
-      <section>
-        <h1>Views</h1>
-        <h2 class="bullet">Fairly 'rare'</h2>
-        <ul>
-          <li>Sophisticated handling of user events</li>
-          <li>DOM Manipulation</li>
-        </ul>
-      </section>
-      <section>
-        <h1>Views - Example</h1>
-        <pre class="small"><code class="language-javascript small">export default Ember.View.extend({
-    dashboard: null,
-    didInsertElement: function() {
-        var packeryEl = Ember.$('.packery');
-        
-        this.set('dashboard', new PackDash(packeryEl).initialize());
-        this.get('controller').on('resize', this.resize.bind(this));
-    },
-    resize: function() {
-        var dashboard = this.get('dashboard');
-        if(dashboard) {
-            Ember.run.later(dashboard.resize);
-        }
-    }
-});
-</code></pre>
-      </section>
-      <section>
-        <h1>Outlets</h1>
-        <h2>Templates get rendered into parent route's 'outlet'</h2>
-        <pre><code class="language-markup">application
-    index
-    /posts
-        /posts/1
-            /posts/1/comments
-            </code></pre>
-      </section>
-      <section>
-        <h1>Templates</h1>
-        <h2>Markup / data-bindings</h2>
-        <h2 class="bullet">Default 'application' template</h2>
-        <ul>
-          <li>Header / Footer / Decorative Content</li>
-          <li>At least one 'outlet'</li>
-        </ul>
-      </section>
-      <section>
-        <h1 class="bullet">Templates</h1>
-        <div class="bullet">
-          <h2>Uses Handlebars</h2>
-          <h2><a href="http://handlebarsjs.com/">http://handlebarsjs.com/</a></h2>
-        </div>
-        <div class="bullet l-p-t10">
-          <h2>Moving to HTMLBars</h2>
-          <h2><a href="http://talks.erikbryn.com/htmlbars/">http://talks.erikbryn.com/htmlbars/</a></h2>
-          <h2>Currently in beta - Release mid-late January</h2>
-        </div>
-      </section>
-      <section>
-        <h1>Templates - Example</h1>
-        <pre class="small"><code class="language-javascript small">&lt;script type="text/x-handlebars" data-template-name="posts"&gt;
-    &lt;div class="container-fluid"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-md-4"&gt;
-                // List of posts
-            &lt;/div&gt;
-            &lt;div class="col-md-8"&gt;
-                {{outlet}}
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/script&gt;
-&lt;script type="text/x-handlebars" data-template-name="activePost"&gt;
-    {{model.name}}
-    {{model.message}}
-&lt;/script&gt;
-</code></pre>
-      </section>
-      <section>
-        <h1 class="bullet">Handlebars to HTMLBars</h1>
-        <div class="bullet">
-          <h2>Handlebars</h2>
-          <pre><code class="language-javascript">&lt;a {{bind-attr href=url}}&gt;My link&lt;/a&gt;</code></pre>
-        </div>
-        <div class="bullet">
-          <h2>HTMLBars</h2>
-          <pre><code class="language-javascript">&lt;a href={{url}}&gt;My link&lt;/a&gt;
-</code></pre>
-        </div>
+        <h1>Generators / Iterators</h1>
       </section>
       <section>
         <h1>Question / Comments</h1>
