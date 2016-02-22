@@ -13,7 +13,7 @@
         <h2>An Introduction</h2>
       </section>
       <section>
-        <h1>Block Scope</h1>
+        <h1>Variable Declaration - Block Scope</h1>
       </section>
       <section>
         <h1>"let"</h1>
@@ -42,7 +42,23 @@
 obj.name = "Brandon"; // This works
 
 const obj = { name: 'Brandon' };
-obj = {}; // This does not work, reference is changing</code></pre>
+obj = {}; // This does not work, reference is changing
+</code></pre>
+      </section>
+      <section>
+        <h1>Template Strings</h1>
+        <ul class="l-p-t10 bullet">
+          <li>Syntactic sugar for constructing strings</li>
+          <li>Similar to string interpolation in other languages</li>
+          <li>To use: wrap text in back-ticks, use ${variableName} to inject dynamic values into strings</li>
+          <li>Multiline strings are also possible</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">var name = "Brandon";
+console.log(`My name is ${name}`);
+
+`This is now
+okay to do provided backticks are used`
+</code></pre>
       </section>
       <section>
         <h1>Enhanced object literals</h1>
@@ -62,7 +78,8 @@ const obj = { [propertyName]: 'Brandon'};
 </code></pre>
       </section>
       <section>
-        <h1>Arrow Functions aka "Fat Arrow"</h1>
+        <h1>Arrow Functions </h1>
+        <h2>aka "Fat Arrow"</h2>
         <ul class="l-p-t10 bullet">
           <li>More concise way of declaring functions</li>
           <li>Arrow functions retain lexical scope of 'this' inside the function</li>
@@ -105,24 +122,68 @@ console.log(a, b, c) // a b c</code></pre>
         <ul class="l-p-10 bullet">
           <li>Objects values can be destructured as well</li>
         </ul>
+        <pre class="small bullet"><code class="language-javascript small">const { x } = { x: 1 }; // x = 1
+</code></pre>
       </section>
       <section>
         <h1>Spread / Rest Operators</h1>
       </section>
       <section>
+        <h1>Spread Operator</h1>
+        <ul class="l-p-10 bullet">
+          <li>Previously, in order to use an an array as an argument to a function, apply was needed</li>
+          <li>Essentially, you are taking an array and "spreading" them out to multiple arguments.</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">function myFunction(x, y, x) {}
+var args = [0, 1, 2];
+
+myFunction.apply(null, args); // Old way
+myFunction(...args); // With ES2015, spread operator can be used when invoking a function</code></pre>
+        <ul class="l-p-10 bullet">
+          <li>Constructing new arrays from older arrays also gets a lot simpler.</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">var parts = ['shoulders', 'knees'];
+var lyrics = ['head', ...parts, 'and', 'toes'];
+</code></pre>
+      </section>
+      <section>
+        <h1>Rest Operator</h1>
+        <ul class="l-p-10 bullet">
+          <li>The rest operator is used when defining functions.</li>
+          <li>Essentially, you are collapsing all remaining arguments into an array</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">function sum(first, ...others) {
+    for(let i = 0; i < others.length; i++) {
+        first += others[i];
+    }
+    
+    return first;
+}
+
+// sum(1, 2, 3, 4) === 10
+</code></pre>
+      </section>
+      <section>
         <h1>Default parameters</h1>
+        <ul class="l-p-10 bullet">
+          <li>Functions can also now have default parameter values</li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">function add(x, y=5) {
+    return x + y;
+}
+
+// y would get the value of 5 if the function was invoked as follows:
+add(2); // === 7</code></pre>
       </section>
       <section>
         <h1>"Classes"</h1>
-      </section>
-      <section>
-        <h1>Generators</h1>
       </section>
       <section>
         <h1>Question / Comments</h1>
       </section>
       <section>
         <h1>es6katas.org</h1>
+        <h1>babeljs.io</h1>
       </section>
     </article>
     <script src="build/build.js"></script>
