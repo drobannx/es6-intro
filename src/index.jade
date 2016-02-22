@@ -3,294 +3,203 @@ html
     head
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-        title Ember: An Introduction
+        title ES2015: An Introduction
 
         link(rel='stylesheet', type='text/css', href='build/build.css')
-        link(rel='shortcut icon' type='image/x-icon' href='favicon.ico')
     body
 
         article
 
             section
-                h1 Ember
+                h1 ES2015
                 h2 An Introduction
                 
             section
-                h1.bullet NPAPI Deprecation
-                div.bullet
-                    h2 Netscape Plugin Application Programming Interface
-                    h2 Hook-in mechanism for plug-ins (like Silverlight)
-                h2.bullet.l-p-t10 <a href="http://www.chromium.org/developers/npapi-deprecation">http://www.chromium.org/developers/npapi-deprecation</a>
-                ul.l-p-t10
-                    li January 2015 - Whitelist-permitted plug-ins blocked
-                    li April 2015 - Plug-ins disabled by default
-                    li September 2015 - Plug-in support completely removed
-                
-            section
-                h1 Terms
-                table
-                    tr
-                        th Ember
-                        th Silverlight
-                    tr
-                        td Route
-                        td ViewModel Constructor
-                    tr
-                        td Controller
-                        td ViewModel
-                    tr
-                        td View
-                        td Storyboard
-                    tr
-                        td Template
-                        td XAML Page
-                        
-            section
-                h1 Object Model
-                h2.bullet Ember.Object
-                ul
-                    li Always 'extend()'
-                    li init
-                    li this._super() 
-                    li (especially if overriding init of core class!)
+                h1 Variable Declaration - Block Scope
 
             section
-                h1 Computed Properties
-                h2.bullet Functions as properties!
-                ul
-                    li Create properties as a function of other properties
-                    li Updates when dependent property changes
-                    
-            section
-                h1 Computed Properties
-                h2 In Silverlight
-                
-            section
-                h1 Custom 'getter' in C#
-                h2 "Create properties as a function of other properties"
-                pre.small
-                    code.language-csharp.small.
-                        public string FirstName { get; set; }
-                        public string LastName { get; set; }
-                        public string FullName 
-                        {
-                            get
-                            {
-                                return FirstName + " " + LastName;
-                            }
-                        }
-                    
-            section
-                h1 INotifyPropertyChanged
-                h2 "Updates when dependent property changes"
-                pre.xsmall
-                    code.language-csharp.xsmall.
-                        public class Person : INotifyPropertyChanged
-                        {
-                            private string _firstName;
-                            public string FirstName
-                            {
-                                get { return _firstName; }
-                                set { _firstName = value; NotifyPropertyChanged("FirstName"); }
-                            }
-                        
-                            public event PropertyChangedEventHandler PropertyChanged;
-                            private void NotifyPropertyChanged(String propertyName)
-                            {
-                                PropertyChangedEventHandler handler = PropertyChanged;
-                                if (handler != null)
-                                {
-                                    handler(this, new PropertyChangedEventArgs(propertyName));
-                                }
-                            }
-                        }
-                    
-            section
-                h1 Computed Properties
-                h2 In Ember
-
-            section
-                h1.bullet Ember.Object
-                h2.bullet "Create properties as a function of other properties"
-                h2.bullet "Updates when dependent property changes"
+                h1 "let"
+                ul.l-p-t10.bullet
+                    li Let restricts the scope of the variable to block scope
+                    li There is no variable hoisting as there is with using var
+                    li Can be reassigned
                 pre.small.bullet
                     code.language-javascript.small.
-                        App.Person = Ember.Object.extend({
-                            // these will be supplied by `create`
-                            firstName: null,
-                            lastName: null,
-                            fullName: function() {
-                                return this.get('firstName') + ' ' + this.get('lastName');
-                            }.property('firstName', 'lastName')
-                        });
+                        function addNumbers(arrayOfNumbers) {
+                            let total = 0;
 
-                        var ironMan = App.Person.create({
-                            firstName: "Tony",
-                            lastName:  "Stark"
-                        });
-
-                        ironMan.get('fullName'); // "Tony Stark"
-
-            section
-                h1 Routing
-                h2.bullet First-Class Citizen
-                ul
-                    li Helps manage application state
-                    li Each state represented by a URL
-                    
-            section
-                h1 Active Route Handlers
-                h2 At any time, one or more routes can be <em>active</em>
-                h2.bullet What causes routes to change?
-                ul
-                    li User interaction with view -> URL change
-                    li User manually changed URL
-            
-            section
-                h1.bullet On Route Change
-                ul
-                    li Conditionally redirect to a new URL
-                    li Update a controller
-                    li Change the template
-                    
-            section
-                h1 The Router
-                h2 Similar to "RouteConfig.cs" and "WebApiConfig.cs"
-                pre.small.bullet
-                    code.small.language-javascript.
-                        var Router = Ember.Router.extend({
-                            location: config.locationType
-                        });
-                        
-                        Router.map(function() {
-                            this.route("posts", function() {
-                                this.route("activePost", { path: "/:id" }, function() {
-                                    this.route("comments");
-                                });
+                            arraryOfNumbers.forEach(function(number) {
+                                let sum = total + number;
+                                total = sum;
                             });
-                        });
-                div.bullet
-                    h2 Example Route
-                    pre.small
-                        code.small.language-markup.
-                            /posts/123/comments
-                        
-            section
-                h1 Controllers
-                h2.bullet Think 'ViewModel'
-                ul
-                    li Decorate models with display logic
-                    li 'Business' logic - saving / updating / deleting
-                    li Bottom line: stuff that doesn't belong in the model
-                    
-            section
-                h1 Controllers - Example
-                h2 Storing Application Properties
-                pre.small
+                        }
+            section 
+                h1 "const"
+                ul.l-p-t10.bullet
+                    li Creates a read-only reference to a variable with block scope
+                    li Must specify a value at the time that the variable is declared
+                    li Objects defined with const can be manipulated, just not reassigned
+
+                pre.small.bullet
                     code.language-javascript.small.
-                        export default Ember.Controller.extend({
-                            // the initial value of the `search` property
-                            search: '',
-                            actions: {
-                                query: function() {
-                                    // the current value of the text field
-                                    var query = this.get('search');
-                                    this.transitionToRoute('search', { query: query });
-                                }
+                        const obj = {};
+                        obj.name = "Brandon"; // This works
+
+                        const obj = { name: 'Brandon' };
+                        obj = {}; // This does not work, reference is changing
+            
+            section 
+                h1 Template Strings
+                ul.l-p-t10.bullet
+                    li Syntactic sugar for constructing strings
+                    li Similar to string interpolation in other languages
+                    li To use: wrap text in back-ticks, use ${variableName} to inject dynamic values into strings
+                    li Multiline strings are also possible
+                pre.small.bullet
+                    code.language-javascript.small.
+                        var name = "Brandon";
+                        console.log(`My name is ${name}`);
+
+                        `This is now
+                        okay to do provided backticks are used`
+
+            section
+                h1 Enhanced object literals
+                ul.l-p-t10.bullet
+                    li If the key and value have the same name, the value can be omitted
+                pre.small.bullet
+                    code.language-javascript.small.
+                        let name = "Brandon";
+
+                        // The below 2 are the same
+                        let obj = { name };
+                        let obj1 = { name: name };
+                ul.l-p-t10.bullet
+                    li Object literal properties can now be computed values instead of only static
+                pre.small.bullet
+                    code.language-javascript.small.
+                        const propertyName = 'name';
+                        const obj = { [propertyName]: 'Brandon'};
+
+            section
+                h1 Arrow Functions 
+                h2 aka "Fat Arrow"
+                
+                ul.l-p-t10.bullet
+                    li More concise way of declaring functions
+                    li Arrow functions retain lexical scope of 'this' inside the function
+                    li No more doing this:
+                        span.l-m-l10
+                            code.language-javascript.small.
+                                var thisView = this;
+                pre.small.bullet
+                    code.language-javascript.small.
+                        let arrayOfNumbers = [1, 2, 3, 4, 5];
+
+                        arrayOfNumbers.forEach((number) => {
+                            // 'this' is the same inside here!
+                            console.log(number);
+                        });
+            section
+                h1 Destructuring
+
+            section
+                h1 Array Destructuring
+
+                ul.l-p-10.bullet
+                    li Helpful for returning multiple values from a function
+                    li Easily assign multiple variables at a time
+
+                pre.small.bullet
+                    code.language-javascript.small.
+                        let [firstValue] = [1];
+                        console.log(firstValue); // 1
+                        let [firstValue, secondValue] = [1, 2];
+                        console.log(firstValue, secondValue); // 1, 2
+                        let [, secondValue] = [1, 2];
+                        console.log(secondValue); // 2
+                
+            section
+                h1 String Destructuring
+
+                ul.l-p-10.bullet
+                    li Strings can also be destructured very similar to arrays
+
+                pre.small.bullet
+                    code.language-javascript.small.
+                        let [a, b, c] = 'abc';
+                        console.log(a, b, c) // a b c
+            section
+                h1 Object Destructuring
+                ul.l-p-10.bullet
+                    li Objects values can be destructured as well
+                pre.small.bullet
+                    code.language-javascript.small.
+                        const { x } = { x: 1 }; // x = 1
+
+            section
+                h1 Spread / Rest Operators
+
+            section
+                h1 Spread Operator
+
+                ul.l-p-10.bullet
+                    li Previously, in order to use an an array as an argument to a function, apply was needed
+                    li Essentially, you are taking an array and "spreading" them out to multiple arguments.
+                pre.small.bullet
+                    code.language-javascript.small.
+                        function myFunction(x, y, x) {}
+                        var args = [0, 1, 2];
+
+                        myFunction.apply(null, args); // Old way
+                        myFunction(...args); // With ES2015, spread operator can be used when invoking a function
+                ul.l-p-10.bullet
+                    li Constructing new arrays from older arrays also gets a lot simpler.
+                pre.small.bullet
+                    code.language-javascript.small.
+                        var parts = ['shoulders', 'knees'];
+                        var lyrics = ['head', ...parts, 'and', 'toes'];
+
+            section
+                h1 Rest Operator
+
+                ul.l-p-10.bullet
+                    li The rest operator is used when defining functions.
+                    li Essentially, you are collapsing all remaining arguments into an array
+
+                pre.small.bullet
+                    code.language-javascript.small.
+                        function sum(first, ...others) {
+                            for(let i = 0; i < others.length; i++) {
+                                first += others[i];
                             }
-                        });
-                    
+
+                            return first;
+                        }
+
+                        // sum(1, 2, 3, 4) === 10
+
             section
-                h1 Views
-                h2.bullet Fairly 'rare'
-                ul
-                    li Sophisticated handling of user events
-                    li DOM Manipulation
-                    
-            section
-                h1 Views - Example
-                pre.small
+                h1 Default parameters
+                
+                ul.l-p-10.bullet
+                    li Functions can also now have default parameter values
+
+                pre.small.bullet
                     code.language-javascript.small.
-                        export default Ember.View.extend({
-                            dashboard: null,
-                            didInsertElement: function() {
-                                var packeryEl = Ember.$('.packery');
-                                
-                                this.set('dashboard', new PackDash(packeryEl).initialize());
-                                this.get('controller').on('resize', this.resize.bind(this));
-                            },
-                            resize: function() {
-                                var dashboard = this.get('dashboard');
-                                if(dashboard) {
-                                    Ember.run.later(dashboard.resize);
-                                }
-                            }
-                        });
-                    
+                        function add(x, y=5) {
+                            return x + y;
+                        }
+
+                        // y would get the value of 5 if the function was invoked as follows:
+                        add(2); // === 7
             section
-                h1 Outlets
-                h2 Templates get rendered into parent route's 'outlet'
-                pre
-                    code.language-markup.
-                        application
-                            index
-                            /posts
-                                /posts/1
-                                    /posts/1/comments
-                    
-            section
-                h1 Templates
-                h2 Markup / data-bindings
-                h2.bullet Default 'application' template
-                ul
-                    li Header / Footer / Decorative Content
-                    li At least one 'outlet'
-                    
-            section
-                h1.bullet Templates
-                div.bullet
-                    h2 Uses Handlebars
-                    h2 <a href="http://handlebarsjs.com/">http://handlebarsjs.com/</a>
-                div.bullet.l-p-t10
-                    h2 Moving to HTMLBars
-                    h2 <a href="http://talks.erikbryn.com/htmlbars/">http://talks.erikbryn.com/htmlbars/</a>
-                    h2 Currently in beta - Release mid-late January
-                    
-            section
-                h1 Templates - Example
-                pre.small
-                    code.language-javascript.small.
-                        &lt;script type="text/x-handlebars" data-template-name="posts"&gt;
-                            &lt;div class="container-fluid"&gt;
-                                &lt;div class="row"&gt;
-                                    &lt;div class="col-md-4"&gt;
-                                        // List of posts
-                                    &lt;/div&gt;
-                                    &lt;div class="col-md-8"&gt;
-                                        {{outlet}}
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/script&gt;
-                        &lt;script type="text/x-handlebars" data-template-name="activePost"&gt;
-                            {{model.name}}
-                            {{model.message}}
-                        &lt;/script&gt;
-                    
-            section
-                h1.bullet Handlebars to HTMLBars
-                div.bullet
-                    h2 Handlebars
-                    pre
-                        code.language-javascript.
-                            &lt;a {{bind-attr href=url}}&gt;My link&lt;/a&gt;
-                div.bullet
-                    h2 HTMLBars
-                    pre
-                        code.language-javascript.
-                            &lt;a href={{url}}&gt;My link&lt;/a&gt;
+                h1 "Classes"
                         
             section
                 h1 Question / Comments
+            section
+                h1 es6katas.org
+                h1 babeljs.io
 
         script(src='build/build.js')
