@@ -169,7 +169,11 @@ console.log(a, b, c) // a b c</code></pre>
         <ul class="l-p-10 bullet">
           <li>Objects values can be destructured as well</li>
         </ul>
-        <pre class="small bullet"><code class="language-javascript small">const { x } = { x: 1 }; // x = 1
+        <pre class="small bullet"><code class="language-javascript small">let o = { p: 42, q: true };
+var { p, q } = o;
+
+// Assign new variable names
+var { p: foo, q: bar } = o;
 </code></pre>
       </section>
       <section>
