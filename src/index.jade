@@ -15,23 +15,39 @@ html
                 h2 An Introduction
                 
             section
-                h1 Variable Declaration - Block Scope
+                h1 Variable Declarations 
+                h2 Block Scope
 
             section
                 h1 "let"
                 ul.l-p-t10.bullet
-                    li Let restricts the scope of the variable to block scope
-                    li There is no variable hoisting as there is with using var
+                    li let restricts the scope of the variable to block scope
+                    li Gets hoisted to the top of the block, but referencing the variable before declaration throws a ReferenceError
                     li Can be reassigned
+
+            section
+                h1 "let"
+
                 pre.small.bullet
                     code.language-javascript.small.
-                        function addNumbers(arrayOfNumbers) {
-                            let total = 0;
+                        function varTest() {
+                            var x = 31;
+                            if(true) {
+                                var x = 71
+                                console.log(x); // 71
+                            }
 
-                            arraryOfNumbers.forEach(function(number) {
-                                let sum = total + number;
-                                total = sum;
-                            });
+                            console.log(x); // 71
+                        }
+                        function letTest() {
+                            let x = 31;
+
+                            if(true) {
+                                let x = 71;
+                                console.log(x); // 71
+                            }
+
+                            console.log(x); // 31
                         }
             section 
                 h1 "const"
@@ -53,7 +69,7 @@ html
                 ul.l-p-t10.bullet
                     li Syntactic sugar for constructing strings
                     li Similar to string interpolation in other languages
-                    li To use: wrap text in back-ticks, use ${variableName} to inject dynamic values into strings
+                    li To use: wrap text in backticks, use ${variableName} to inject dynamic values into strings
                     li Multiline strings are also possible
                 pre.small.bullet
                     code.language-javascript.small.
@@ -74,12 +90,21 @@ html
                         // The below 2 are the same
                         let obj = { name };
                         let obj1 = { name: name };
+                
+            section
+                h1 Enhanced object literals
                 ul.l-p-t10.bullet
-                    li Object literal properties can now be computed values instead of only static
+                    li Object literal properties can now be computed values instead of only static values
                 pre.small.bullet
                     code.language-javascript.small.
                         const propertyName = 'name';
-                        const obj = { [propertyName]: 'Brandon'};
+
+                        // Old way
+                        let obj = {};
+                        obj[propertyName] = 'Brandon'
+
+                        // New way
+                        let obj = { [propertyName]: 'Brandon'};
 
             section
                 h1 Arrow Functions 
@@ -87,19 +112,42 @@ html
                 
                 ul.l-p-t10.bullet
                     li More concise way of declaring functions
+
+                pre.small.bullet
+                    code.language-javascript.small.
+                        (param1) => { console.log("I'm a function") };
+                        param1 => { console.log("I'm a function") };
+
+                        param1 => param1 * 5; // If curlys are omitted, the expression is returned;
+                        param1 => { return param1 * 5; }
+
+            section
+                h1 Arrow Functions
+
+                ul.l-p-t10.bullet
                     li Arrow functions retain lexical scope of 'this' inside the function
                     li No more doing this:
                         span.l-m-l10
                             code.language-javascript.small.
                                 var thisView = this;
+                
                 pre.small.bullet
                     code.language-javascript.small.
-                        let arrayOfNumbers = [1, 2, 3, 4, 5];
+                        function Person() {
+                            var self = this;
+                            self.age = 0;
 
-                        arrayOfNumbers.forEach((number) => {
-                            // 'this' is the same inside here!
-                            console.log(number);
-                        });
+                            setInterval(function() {
+                                self.age++;
+                            }, 1000);
+                        }
+                        function Person() {
+                            this.age = 0;
+
+                            setInterval(() => {
+                                this.age++;
+                            }, 1000);
+                        }
             section
                 h1 Destructuring
 
@@ -144,7 +192,7 @@ html
                 h1 Spread Operator
 
                 ul.l-p-10.bullet
-                    li Previously, in order to use an an array as an argument to a function, apply was needed
+                    li Previously, in order to use an array as an argument to a function, apply was needed
                     li Essentially, you are taking an array and "spreading" them out to multiple arguments.
                 pre.small.bullet
                     code.language-javascript.small.
@@ -182,11 +230,17 @@ html
             section
                 h1 Default parameters
                 
-                ul.l-p-10.bullet
+                ul.l-p-10.ticbullet
                     li Functions can also now have default parameter values
 
                 pre.small.bullet
                     code.language-javascript.small.
+                        function add(x, y) {
+                            y = y || 5;
+
+                            return x + y;
+                        }
+
                         function add(x, y=5) {
                             return x + y;
                         }
@@ -195,7 +249,35 @@ html
                         add(2); // === 7
             section
                 h1 "Classes"
-                        
+                
+                ul.l-p-10.bullet
+                    li Class syntax is syntatic sugar over the existing prototype based inheritance
+                    li This is NOT introducting an OO model to JavaScript
+                    li 'constructor' is a reserved keyword function that gets called when an object is created
+                    li Supports static methods which can be called without instantiating the class
+                    li Functions defined in a class block do not need to be comma separated like an object literal
+                
+            section
+                h1 "Classes"
+                
+                pre.small.bullet
+                    code.language-javascript.small.
+                        class Point {
+                            constructor(x, y) {
+                                this.x = x;
+                                this.y = y;
+                            }
+
+                            static distance(a, b) {
+                                const dx = a.x - b.x;
+                                const dy = a.y - b.y;
+                            }
+                        }
+
+                        const p1 = new Point(5, 5);
+                        const p2 = new Point(10, 10);
+
+                        console.log(Point.distance(p1, p2));
             section
                 h1 Question / Comments
             section
