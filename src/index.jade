@@ -183,7 +183,11 @@ html
                     li Objects values can be destructured as well
                 pre.small.bullet
                     code.language-javascript.small.
-                        const { x } = { x: 1 }; // x = 1
+                        let o = { p: 42, q: true };
+                        var { p, q } = o;
+
+                        // Assign new variable names
+                        var { p: foo, q: bar } = o;
 
             section
                 h1 Spread / Rest Operators
