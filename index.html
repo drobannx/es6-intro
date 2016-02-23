@@ -13,22 +13,37 @@
         <h2>An Introduction</h2>
       </section>
       <section>
-        <h1>Variable Declaration - Block Scope</h1>
+        <h1>Variable Declarations </h1>
+        <h2>Block Scope</h2>
       </section>
       <section>
         <h1>"let"</h1>
         <ul class="l-p-t10 bullet">
-          <li>Let restricts the scope of the variable to block scope</li>
-          <li>There is no variable hoisting as there is with using var</li>
+          <li>let restricts the scope of the variable to block scope</li>
+          <li>Gets hoisted to the top of the block, but referencing the variable before declaration throws a ReferenceError</li>
           <li>Can be reassigned</li>
         </ul>
-        <pre class="small bullet"><code class="language-javascript small">function addNumbers(arrayOfNumbers) {
-    let total = 0;
+      </section>
+      <section>
+        <h1>"let"</h1>
+        <pre class="small bullet"><code class="language-javascript small">function varTest() {
+    var x = 31;
+    if(true) {
+        var x = 71
+        console.log(x); // 71
+    }
     
-    arraryOfNumbers.forEach(function(number) {
-        let sum = total + number;
-        total = sum;
-    });
+    console.log(x); // 71
+}
+function letTest() {
+    let x = 31;
+    
+    if(true) {
+        let x = 71;
+        console.log(x); // 71
+    }
+    
+    console.log(x); // 31
 }</code></pre>
       </section>
       <section>
@@ -50,7 +65,7 @@ obj = {}; // This does not work, reference is changing
         <ul class="l-p-t10 bullet">
           <li>Syntactic sugar for constructing strings</li>
           <li>Similar to string interpolation in other languages</li>
-          <li>To use: wrap text in back-ticks, use ${variableName} to inject dynamic values into strings</li>
+          <li>To use: wrap text in backticks, use ${variableName} to inject dynamic values into strings</li>
           <li>Multiline strings are also possible</li>
         </ul>
         <pre class="small bullet"><code class="language-javascript small">var name = "Brandon";
@@ -69,12 +84,22 @@ okay to do provided backticks are used`
 
 // The below 2 are the same
 let obj = { name };
-let obj1 = { name: name };</code></pre>
+let obj1 = { name: name };
+</code></pre>
+      </section>
+      <section>
+        <h1>Enhanced object literals</h1>
         <ul class="l-p-t10 bullet">
-          <li>Object literal properties can now be computed values instead of only static</li>
+          <li>Object literal properties can now be computed values instead of only static values</li>
         </ul>
         <pre class="small bullet"><code class="language-javascript small">const propertyName = 'name';
-const obj = { [propertyName]: 'Brandon'};
+
+// Old way
+let obj = {};
+obj[propertyName] = 'Brandon'
+
+// New way
+let obj = { [propertyName]: 'Brandon'};
 </code></pre>
       </section>
       <section>
@@ -82,15 +107,37 @@ const obj = { [propertyName]: 'Brandon'};
         <h2>aka "Fat Arrow"</h2>
         <ul class="l-p-t10 bullet">
           <li>More concise way of declaring functions</li>
-          <li>Arrow functions retain lexical scope of 'this' inside the function</li>
-          <li>No more doing this:<span class="l-m-l10"><code class="language-javascript small">var thisView = this;</code></span></li>
         </ul>
-        <pre class="small bullet"><code class="language-javascript small">let arrayOfNumbers = [1, 2, 3, 4, 5];
+        <pre class="small bullet"><code class="language-javascript small">(param1) => { console.log("I'm a function") };
+param1 => { console.log("I'm a function") };
 
-arrayOfNumbers.forEach((number) => {
-    // 'this' is the same inside here!
-    console.log(number);
-});</code></pre>
+param1 => param1 * 5; // If curlys are omitted, the expression is returned;
+param1 => { return param1 * 5; }
+</code></pre>
+      </section>
+      <section>
+        <h1>Arrow Functions</h1>
+        <ul class="l-p-t10 bullet">
+          <li>Arrow functions retain lexical scope of 'this' inside the function</li>
+          <li>No more doing this:<span class="l-m-l10"><code class="language-javascript small">
+                var thisView = this;
+                </code></span></li>
+        </ul>
+        <pre class="small bullet"><code class="language-javascript small">function Person() {
+    var self = this;
+    self.age = 0;
+    
+    setInterval(function() {
+        self.age++;
+    }, 1000);
+}
+function Person() {
+    this.age = 0;
+    
+    setInterval(() => {
+        this.age++;
+    }, 1000);
+}</code></pre>
       </section>
       <section>
         <h1>Destructuring</h1>
@@ -131,7 +178,7 @@ console.log(a, b, c) // a b c</code></pre>
       <section>
         <h1>Spread Operator</h1>
         <ul class="l-p-10 bullet">
-          <li>Previously, in order to use an an array as an argument to a function, apply was needed</li>
+          <li>Previously, in order to use an array as an argument to a function, apply was needed</li>
           <li>Essentially, you are taking an array and "spreading" them out to multiple arguments.</li>
         </ul>
         <pre class="small bullet"><code class="language-javascript small">function myFunction(x, y, x) {}
@@ -165,10 +212,16 @@ var lyrics = ['head', ...parts, 'and', 'toes'];
       </section>
       <section>
         <h1>Default parameters</h1>
-        <ul class="l-p-10 bullet">
+        <ul class="l-p-10 ticbullet">
           <li>Functions can also now have default parameter values</li>
         </ul>
-        <pre class="small bullet"><code class="language-javascript small">function add(x, y=5) {
+        <pre class="small bullet"><code class="language-javascript small">function add(x, y) {
+    y = y || 5;
+    
+    return x + y;
+}
+
+function add(x, y=5) {
     return x + y;
 }
 
@@ -177,6 +230,32 @@ add(2); // === 7</code></pre>
       </section>
       <section>
         <h1>"Classes"</h1>
+        <ul class="l-p-10 bullet">
+          <li>Class syntax is syntatic sugar over the existing prototype based inheritance</li>
+          <li>This is NOT introducting an OO model to JavaScript</li>
+          <li>'constructor' is a reserved keyword function that gets called when an object is created</li>
+          <li>Supports static methods which can be called without instantiating the class</li>
+          <li>Functions defined in a class block do not need to be comma separated like an object literal</li>
+        </ul>
+      </section>
+      <section>
+        <h1>"Classes"</h1>
+        <pre class="small bullet"><code class="language-javascript small">class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    static distance(a, b) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+    }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+
+console.log(Point.distance(p1, p2));</code></pre>
       </section>
       <section>
         <h1>Question / Comments</h1>
